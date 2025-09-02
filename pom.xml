@@ -12,7 +12,7 @@
         <relativePath/>
     </parent>
 
-    <groupId>com.seckill</groupId>
+    <groupId>com.xxxx.seckill</groupId>
     <artifactId>seckill-project</artifactId>
     <version>1.0.0</version>
     <name>seckill-project</name>
@@ -50,6 +50,13 @@
             <optional>true</optional>
         </dependency>
 
+        <!-- mybatis-plus -->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>3.5.12</version>
+        </dependency>
+
         <!-- Spring Boot 测试依赖 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -70,6 +77,17 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
             <optional>true</optional>
+        </dependency>
+        
+        <!-- md5 dependency-->
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.6</version>
         </dependency>
     </dependencies>
 
