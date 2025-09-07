@@ -46,7 +46,7 @@ spring:
 #Mybatis-plus 配置
 mybatis-plus:
   mapper-locations: classpath*:/mapper/*Mapper.xml
-  type-aliases-package: com.xxxx.seckill.pojo
+  type-aliases-package: com.xxxx.seckill.entity
 
 logging:
   level:
