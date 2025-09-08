@@ -1,6 +1,8 @@
 package com.xxxx.seckill.entity;
 
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import io.swagger.annotations.ApiModel;
@@ -30,6 +32,9 @@ import java.time.LocalDateTime;
 public class User extends Model<User> {
 
     private static final long serialVersionUID = 1L;
+
+    @TableId(value = "id", type = IdType.AUTO)
+    private Long id;
 
     @TableField("nickname")
     private String nickname;
@@ -74,6 +79,6 @@ public class User extends Model<User> {
 
     @Override
     public Serializable pkVal() {
-        return null;
+        return this.id;
     }
 }

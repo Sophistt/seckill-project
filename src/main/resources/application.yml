@@ -1,8 +1,6 @@
 server:
   port: 8080
   address: 0.0.0.0
-  servlet:
-    context-path: /seckill
 
 spring:
   application:
@@ -11,8 +9,8 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/seckill?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai
-    username: root
-    password: your_password
+    username: kanye
+    password: 123456
     # 数据库连接池，当前 hikari 是性能最优的
     hikari:
       # 连接池名

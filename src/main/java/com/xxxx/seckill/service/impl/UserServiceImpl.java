@@ -2,9 +2,18 @@ package com.xxxx.seckill.service.impl;
 
 import com.xxxx.seckill.entity.User;
 import com.xxxx.seckill.mapper.UserMapper;
-import com.xxxx.seckill.service.UserService;
+import com.xxxx.seckill.service.IUserService;
+import com.xxxx.seckill.utils.MD5Util;
+import com.xxxx.seckill.utils.ValidatorUtil;
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.xxxx.seckill.vo.LoginVo;
+import com.xxxx.seckill.vo.RespBean;
+import com.xxxx.seckill.vo.RespBeanEnum;
 
 /**
  * <p>
@@ -15,6 +24,32 @@ import org.springframework.stereotype.Service;
  * @since 2025-09-07
  */
 @Service
-public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
+public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IUserService {
 
+    @Autowired
+    private UserMapper userMapper;
+
+    @Override
+    public RespBean doLogin(LoginVo loginVo) {
+        String mobile = loginVo.getMobile();
+        String password = loginVo.getPassword();
+
+        if (StringUtils.isEmpty(password) || StringUtils.isEmpty(mobile)) {
+            return RespBean.error(RespBeanEnum.LOGIN_ERROR);
+        }
+        // 正则校验是否为有效手机号
+        if (!ValidatorUtil.isMobile(mobile)) {
+            return RespBean.error(RespBeanEnum.MOBILE_ERROR);
+        }
+        // 根据手机号获取用户
+        User user = userMapper.selectById(mobile);
+        if (null == user) {
+            return RespBean.error(RespBeanEnum.LOGIN_ERROR);
+        }
+        // 判断密码是否正确
+        if (!MD5Util.formPassToDBPass(password, user.getSalt()).equals(user.getPassword())) {
+            return RespBean.error(RespBeanEnum.LOGIN_ERROR);
+        }
+        return RespBean.success();
+    }
 }
