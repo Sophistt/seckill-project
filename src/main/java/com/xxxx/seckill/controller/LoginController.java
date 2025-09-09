@@ -2,10 +2,11 @@ package com.xxxx.seckill.controller;
 
 import lombok.extern.slf4j.Slf4j;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -35,7 +36,7 @@ public class LoginController {
 
     @RequestMapping("/doLogin")
     @ResponseBody
-    public RespBean doLogin(LoginVo loginVo) {
+    public RespBean doLogin(@Valid LoginVo loginVo) {
         log.info("{}", loginVo);
         return userService.doLogin(loginVo);
     }
