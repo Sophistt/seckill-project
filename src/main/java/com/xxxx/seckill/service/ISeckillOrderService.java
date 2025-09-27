@@ -8,6 +8,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
 * @description 针对表【t_seckill_order】的数据库操作Service
 * @createDate 2025-09-27 21:56:03
 */
-public interface SeckillOrderService extends IService<SeckillOrder> {
+public interface ISeckillOrderService extends IService<SeckillOrder> {
 
 }

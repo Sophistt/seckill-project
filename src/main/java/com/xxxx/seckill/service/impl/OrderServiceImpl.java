@@ -2,7 +2,7 @@ package com.xxxx.seckill.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.xxxx.seckill.entity.Order;
-import com.xxxx.seckill.service.OrderService;
+import com.xxxx.seckill.service.IOrderService;
 import com.xxxx.seckill.mapper.OrderMapper;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 */
 @Service
 public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order>
-    implements OrderService{
+    implements IOrderService {
 
 }
 

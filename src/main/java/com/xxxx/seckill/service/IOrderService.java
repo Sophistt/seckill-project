@@ -8,6 +8,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
 * @description 针对表【t_order】的数据库操作Service
 * @createDate 2025-09-27 21:55:23
 */
-public interface OrderService extends IService<Order> {
+public interface IOrderService extends IService<Order> {
 
 }

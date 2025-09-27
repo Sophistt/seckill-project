@@ -8,6 +8,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
 * @description 针对表【t_seckill_goods】的数据库操作Service
 * @createDate 2025-09-27 21:56:00
 */
-public interface SeckillGoodsService extends IService<SeckillGoods> {
+public interface ISeckillGoodsService extends IService<SeckillGoods> {
 
 }

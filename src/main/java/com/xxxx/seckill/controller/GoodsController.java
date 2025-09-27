@@ -1,6 +1,7 @@
 package com.xxxx.seckill.controller;
 
 import com.xxxx.seckill.entity.User;
+import com.xxxx.seckill.service.IGoodsService;
 import com.xxxx.seckill.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -40,6 +41,10 @@ public class GoodsController {
     @Qualifier("userServiceImpl")
     private IUserService userService;
 
+    @Autowired
+    @Qualifier("goodsServiceImpl")
+    private IGoodsService goodsService;
+
     /**
      * 跳转到商品列表页面
      *
@@ -62,6 +67,8 @@ public class GoodsController {
 
         // 将用户信息传递给视图
         model.addAttribute("user", user);
+
+        model.addAttribute("goodsList", goodsService.findGoodsVo());
         return "goodsList";
     }
 }
