@@ -1,13 +1,20 @@
 package com.xxxx.seckill.controller;
 
+import com.xxxx.seckill.entity.Goods;
 import com.xxxx.seckill.entity.User;
 import com.xxxx.seckill.service.IGoodsService;
 import com.xxxx.seckill.service.IUserService;
+import com.xxxx.seckill.vo.GoodsVo;
+
+import lombok.extern.java.Log;
+import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.thymeleaf.util.StringUtils;
 
@@ -35,6 +42,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @Controller
 @RequestMapping("/goods")
+@Slf4j
 public class GoodsController {
 
     @Autowired
@@ -67,8 +75,19 @@ public class GoodsController {
 
         // 将用户信息传递给视图
         model.addAttribute("user", user);
-
         model.addAttribute("goodsList", goodsService.findGoodsVo());
         return "goodsList";
     }
-}
+
+    @RequestMapping("/toDetail/{goodsId}")
+    public String toDetail(Model model, User user, @PathVariable Long goodsId) {
+        if (user == null) {
+            return "login";
+        }
+        GoodsVo goods = goodsService.findGoodsVoByGoodsId(goodsId);
+        log.info("goods = " + goods);
+        model.addAttribute("user", user);
+        model.addAttribute("goods", goods);
+        return "goodsDetail";
+    }
+}   

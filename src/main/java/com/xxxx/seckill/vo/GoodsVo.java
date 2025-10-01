@@ -1,7 +1,7 @@
 package com.xxxx.seckill.vo;
 
 import java.math.BigDecimal;
-import java.sql.Date;
+import java.util.Date;
 
 import com.xxxx.seckill.entity.Goods;
 
