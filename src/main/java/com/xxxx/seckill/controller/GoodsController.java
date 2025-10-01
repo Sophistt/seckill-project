@@ -84,9 +84,29 @@ public class GoodsController {
         if (user == null) {
             return "login";
         }
-        GoodsVo goods = goodsService.findGoodsVoByGoodsId(goodsId);
-        log.info("goods = " + goods);
         model.addAttribute("user", user);
+
+
+        GoodsVo goods = goodsService.findGoodsVoByGoodsId(goodsId);
+        long startAt = goods.getStartDate().getTime();
+        long endAt = goods.getEndDate().getTime();
+        long now = System.currentTimeMillis();
+        // 秒杀状态
+        int seckillStatus = 0;
+        // 剩余时间
+        int remainSeconds = 0;
+        if (now < startAt) { // 秒杀未开始
+            seckillStatus = 0;
+            remainSeconds = (int) ((startAt - now) / 1000);
+        } else if (now > endAt) { // 秒杀已结束
+            seckillStatus = 2;
+            remainSeconds = -1;
+        } else { // 秒杀进行中
+            seckillStatus = 1;
+            remainSeconds = 0;
+        }
+        model.addAttribute("seckillStatus", seckillStatus);
+        model.addAttribute("remainSeconds", remainSeconds);
         model.addAttribute("goods", goods);
         return "goodsDetail";
     }

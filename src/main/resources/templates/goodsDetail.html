@@ -34,10 +34,25 @@
             <td>商品简介</td>
             <td colspan="3" th:text="${goods.goodsTitle}"></td>
         </tr>
-        <tr>
+        <tr style="vertical-align: middle;">
             <td>秒杀开始时间</td>
-            <td colspan="3" th:text="${#dates.format(goods.startDate,'yyyy-MM-dd HH:mm:ss')}"></td>
-            <td>秒杀倒计时：</td>
+            <td th:text="${#dates.format(goods.startDate,'yyyy-MM-dd HH:mm:ss')}"></td>
+            <td id="seckillTip">
+                <input type="hidden" id="remainSeconds" th:value="${remainSeconds}"/>
+                <span th:if="${seckillStatus == 0}">秒杀倒计时：
+                    <span id="countDown" th:text="${remainSeconds}"></span>秒
+                </span>
+                <span th:if="${seckillStatus == 1}">秒杀进行中</span>
+                <span th:if="${seckillStatus == 2}">秒杀已结束</span>
+            </td>
+            <td>
+                <form id="seckillForm"  th:action="@{/seckill/doSeckill}" method="post">
+                    <input type="hidden" name="goodsId" th:value="${goods.id}"/>
+                    <button type="submit" disabled class="btn btn-primary"
+                            id="buyButton">立即秒杀
+                    </button>
+                </form>
+            </td>
         </tr>
         <tr>
             <td>商品原价</td>
@@ -55,5 +70,32 @@
 </div>
 </body>
 <script>
+    var timeout;
+    $(function () {
+        countDown();
+    });
+    // 秒杀倒计时
+    function countDown() {
+        var remainSeconds = $("#remainSeconds").val();
+        var seckillStatus = $("#seckillStatus").val();
+        // 秒杀未开始
+        if (remainSeconds > 0) {
+            remainSeconds--;
+            $("#countDown").text(remainSeconds);
+            $("#remainSeconds").val(remainSeconds);
+            timeout = setTimeout(countDown, 1000);
+        } else if (remainSeconds == 0) {
+            // 秒杀进行中
+            $("#buyButton").attr("disabled", false);
+            $("#seckillTip").html("秒杀进行中");
+            if (timeout) {
+                clearTimeout(timeout);
+            }
+        } else {
+            // 秒杀已结束
+            $("#buyButton").attr("disabled", true);
+            $("#seckillTip").html("秒杀已结束");
+        }
+    };
 </script>
 </html>
