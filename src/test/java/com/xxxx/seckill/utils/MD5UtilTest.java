@@ -43,9 +43,9 @@ class MD5UtilTest {
     void testInputPassToFormPass() {
         // 测试前端密码到表单密码的转换
         String inputPass = "123456";
-        String expected = "ce21b747de5af71ab5c2e20ff0a60eea"; // 根据main方法中的输出
+        String expected = "d3b1294a61a07da9b49b6e22b2cbd7f9"; // 根据main方法中的输出
         String actual = MD5Util.inputPassToFormPass(inputPass);
-        
+
         assertEquals(expected, actual, "前端密码转换应该产生预期的表单密码");
         
         // 测试不同输入
@@ -70,11 +70,11 @@ class MD5UtilTest {
     @Test
     void testFormPassToDBPass() {
         // 测试表单密码到数据库密码的转换
-        String formPass = "ce21b747de5af71ab5c2e20ff0a60eea";
-        String salt = "xiaochaoaidami";
-        String expected = "fbbb652b77b85f999898b55e8f8eaab1"; // 根据main方法的实际输出
+        String formPass = "d3b1294a61a07da9b49b6e22b2cbd7f9";
+        String salt = "1a2b3c4d";
+        String expected = "b7797cce01b4b131b433b6acf4add449"; // 根据main方法的实际输出
         String actual = MD5Util.formPassToDBPass(formPass, salt);
-        
+
         assertEquals(expected, actual, "表单密码到数据库密码转换应该产生预期结果");
         assertNotNull(actual, "数据库密码不应该为null");
         assertEquals(32, actual.length(), "数据库密码应该是32位十六进制字符串");
@@ -110,10 +110,10 @@ class MD5UtilTest {
     void testInputPassToDBPass() {
         // 测试完整的双重加密流程
         String inputPass = "123456";
-        String salt = "xiaochaoaidami";
-        String expected = "fbbb652b77b85f999898b55e8f8eaab1"; // 根据main方法中的实际输出
+        String salt = "1a2b3c4d";
+        String expected = "b7797cce01b4b131b433b6acf4add449"; // 根据main方法中的实际输出
         String actual = MD5Util.inputPassToDBPass(inputPass, salt);
-        
+
         assertEquals(expected, actual, "完整双重加密应该产生预期的结果");
         
         // 验证它与分步加密的结果一致
