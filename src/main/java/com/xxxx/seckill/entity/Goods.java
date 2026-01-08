@@ -4,9 +4,10 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.Data;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
-import lombok.Data;
 
 /**
  * 
@@ -91,19 +92,17 @@ public class Goods implements Serializable {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", id=").append(id);
-        sb.append(", goodsName=").append(goodsName);
-        sb.append(", goodsTitle=").append(goodsTitle);
-        sb.append(", goodsImg=").append(goodsImg);
-        sb.append(", goodsDetail=").append(goodsDetail);
-        sb.append(", goodsPrice=").append(goodsPrice);
-        sb.append(", goodsStock=").append(goodsStock);
-        sb.append(", serialVersionUID=").append(serialVersionUID);
-        sb.append("]");
-        return sb.toString();
+        return getClass().getSimpleName() +
+                " [" +
+                "Hash = " + hashCode() +
+                ", id=" + id +
+                ", goodsName=" + goodsName +
+                ", goodsTitle=" + goodsTitle +
+                ", goodsImg=" + goodsImg +
+                ", goodsDetail=" + goodsDetail +
+                ", goodsPrice=" + goodsPrice +
+                ", goodsStock=" + goodsStock +
+                ", serialVersionUID=" + serialVersionUID +
+                "]";
     }
 }
