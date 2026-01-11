@@ -8,9 +8,7 @@ spring:
   
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/seckill?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai
-    username: kanye
-    password: 123456
+    url: jdbc:mysql://localhost:3306/seckill?useUnicode=true&characterEncoding=UTF8&serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true&rewriteBatchedStatements=true
     # 数据库连接池，当前 hikari 是性能最优的
     hikari:
       # 连接池名
