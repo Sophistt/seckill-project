@@ -16,6 +16,9 @@ import org.springframework.web.method.support.ModelAndViewContainer;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.lang.Nullable;
+import org.springframework.lang.NonNull;
+
 /**
  * 用户参数自动解析器
  *
@@ -51,7 +54,7 @@ public class UserArgumentResolver implements HandlerMethodArgumentResolver {
      * @return true 如果参数类型是User类，false 其他情况
      */
     @Override
-    public boolean supportsParameter(MethodParameter parameter) {
+    public boolean supportsParameter(@NonNull MethodParameter parameter) {
         Class<?> clazz = parameter.getParameterType();
         // 只有当参数类型严格等于User.class时才支持解析
         // 这种精确匹配确保了类型安全，避免意外解析其他类型
@@ -79,8 +82,11 @@ public class UserArgumentResolver implements HandlerMethodArgumentResolver {
      * @return User对象（认证成功）或null（认证失败）
      */
     @Override
-    public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer, NativeWebRequest webRequest,
-                                  WebDataBinderFactory binderFactory) throws Exception {
+    public Object resolveArgument(
+            @NonNull MethodParameter parameter, 
+            @Nullable ModelAndViewContainer mavContainer, 
+            @NonNull NativeWebRequest webRequest,
+            @Nullable WebDataBinderFactory binderFactory) throws Exception {
 
         // 获取原生的HTTP请求和响应对象
         HttpServletRequest request = (HttpServletRequest) webRequest.getNativeRequest();

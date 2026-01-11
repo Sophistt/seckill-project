@@ -3,10 +3,11 @@ package com.xxxx.seckill.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.util.List;
+
+import org.springframework.lang.NonNull;
 
 /**
  * Spring MVC Web配置类
@@ -48,7 +49,7 @@ public class WebConfig implements WebMvcConfigurer {
      * @param resolvers Spring MVC的参数解析器列表
      */
     @Override
-    public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
+    public void addArgumentResolvers(@NonNull List<HandlerMethodArgumentResolver> resolvers) {
         // 将用户参数解析器添加到解析器链中
         // 这使得所有控制器方法都可以自动注入User参数
         resolvers.add(userArgumentResolver);
