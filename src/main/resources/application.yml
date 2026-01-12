@@ -18,7 +18,7 @@ spring:
       # 空闲连接最大存活时间
       idle-timeout: 60000
       # 最大连接数
-      maximum-poool-size: 10
+      maximum-pool-size: 10
       # 从连接池返回的连接自动提交
       auto-commit: true
       # 连接最大存货时间，0 表示永久存货
@@ -37,7 +37,7 @@ spring:
     # 数据库 0 - 15
     database: 0
     # 超时时间
-    tiemout: 10000ms
+    timeout: 10000ms
     lettuce:
       pool:
         # 最大连接数，默认 8
@@ -48,6 +48,16 @@ spring:
         max-idle: 200
         # 最小空闲连接，默认 0
         min-idle: 5
+
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+    virtual-host: /
+    listener:
+      simple:
+        acknowledge-mode: manual # 手动确认模式，确保消息不丢失
 
   thymeleaf:
     mode: HTML
